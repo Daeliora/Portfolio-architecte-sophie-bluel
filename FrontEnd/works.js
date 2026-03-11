@@ -28,3 +28,48 @@ function genererTravaux(travaux) {
         figure.appendChild(figcaption);
     }
 }
+
+async function recupererCategories() {
+    const reponse = await fetch("http://localhost:5678/api/categories");
+    const categories = await reponse.json();
+    genererFiltres(categories);
+}
+
+function genererFiltres(categories) {
+    const divFilters = document.querySelector(".filters"); // Assure-toi d'avoir cette div dans ton HTML
+
+    // 1. Création du bouton "Tous"
+    const boutonTous = document.createElement("button");
+    boutonTous.innerText = "Tous";
+    boutonTous.classList.add("btn-filter", "active"); // Ajoute tes classes CSS
+    divFilters.appendChild(boutonTous);
+
+    boutonTous.addEventListener("click", () => {
+        document.querySelector(".gallery").innerHTML = ""; // On vide la galerie
+        recupererTravaux(); // On recharge tout
+    });
+
+    // 2. Création des boutons par catégorie
+    categories.forEach(categorie => {
+        const bouton = document.createElement("button");
+        bouton.innerText = categorie.name;
+        bouton.classList.add("btn-filter");
+        divFilters.appendChild(bouton);
+
+        bouton.addEventListener("click", () => {
+            filtrerTravaux(categorie.id);
+        });
+    });
+}
+
+async function filtrerTravaux(idCategorie) {
+    const reponse = await fetch("http://localhost:5678/api/works");
+    const travaux = await reponse.json();
+    
+    // On filtre la liste
+    const travauxFiltrés = travaux.filter(travail => travail.categoryId === idCategorie);
+    
+    // On vide la galerie et on réaffiche seulement les bons
+    document.querySelector(".gallery").innerHTML = "";
+    genererTravaux(travauxFiltrés); // Tu réutilises ta fonction de l'étape précédente !
+}
