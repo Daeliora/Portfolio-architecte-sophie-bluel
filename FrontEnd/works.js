@@ -1,7 +1,7 @@
 async function recupererTravaux() {
     const reponse = await fetch("http://localhost:5678/api/works");
     const travaux = await reponse.json();
-    console.log(travaux); // Pour vérifier que tu reçois bien les données
+    console.log(travaux); // Pour vérifier qu'on reçoit bien les données
     genererTravaux(travaux);
 }
 
