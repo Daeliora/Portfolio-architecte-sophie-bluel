@@ -3,6 +3,36 @@
    License: none (public domain)
 */
 
+
+
+/*boutons filtres*/
+.filters {
+	display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 50px;
+}
+
+.filters button {
+	font-family: 'Syne';
+    font-weight: 700;
+    color: #1D6154;
+    background-color: white;
+    border: 1px solid #1D6154;
+    border-radius: 60px;
+    padding: 10px 20px;
+    cursor: pointer;
+    min-width: 100px;
+}
+
+.filters button:hover, .filters button.active {
+    background-color: #1D6154;
+    color: white;
+}
+
+
+
+/*donnés de base*/
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
