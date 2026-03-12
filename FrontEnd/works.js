@@ -70,10 +70,10 @@ async function filtrerTravaux(idCategorie) {
     const travaux = await reponse.json();
     
     // filtre la liste
-    const travauxFiltrés = travaux.filter(travail => travail.categoryId === idCategorie);
+    const travauxFiltres = travaux.filter(travail => travail.categoryId === idCategorie);
     
     // vide la galerie et on réaffiche seulement les bons
     document.querySelector(".gallery").innerHTML = "";
-    genererTravaux(travauxFiltrés); // réutilises la fonction de l'étape précédente 
+    genererTravaux(travauxFiltres);
 }
 
