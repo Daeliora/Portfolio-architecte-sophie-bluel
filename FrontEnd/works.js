@@ -33,9 +33,9 @@ async function recupererCategories() {
     const reponse = await fetch("http://localhost:5678/api/categories");
     const categories = await reponse.json();
     genererFiltres(categories);
-}
+}       // attention devrait être en 2 fonctions, recupererCategorie et genererFiltres car peut poser problème plus tard
 
-
+recupererCategories()
 // ------------- Filtres ---------------------------
 
 function genererFiltres(categories) {
@@ -51,17 +51,20 @@ function genererFiltres(categories) {
         document.querySelector(".gallery").innerHTML = ""; // vide la galerie
         recupererTravaux(); // On recharge tout
     });
-
+    console.log(categories)
     // Création des boutons par catégorie
     categories.forEach(categorie => {
         const bouton = document.createElement("button");
         bouton.innerText = categorie.name;
         bouton.classList.add("btn-filter");
-        divFilters.appendChild(bouton);
+       
 
         bouton.addEventListener("click", () => {
             filtrerTravaux(categorie.id);
+        console.log(this)
+        
         });
+         divFilters.appendChild(bouton);
     });
 }
 
@@ -71,7 +74,8 @@ async function filtrerTravaux(idCategorie) {
     
     // filtre la liste
     const travauxFiltres = travaux.filter(travail => travail.categoryId === idCategorie);
-    
+    console.log(travauxFiltres)
+
     // vide la galerie et on réaffiche seulement les bons
     document.querySelector(".gallery").innerHTML = "";
     genererTravaux(travauxFiltres);
