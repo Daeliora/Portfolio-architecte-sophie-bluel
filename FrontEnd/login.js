@@ -10,7 +10,7 @@ async function loginUtilisateur(email, password) {
         if (response.ok) {
             return await response.json(); // Retourne l'ID et le Token
         } else {
-            alert("Erreur dans l’identifiant ou le mot de passe");
+            alert("Erreur dans l'identifiant ou le mot de passe");
         }
     } catch (error) {
         console.error("Erreur lors de la connexion :", error);
