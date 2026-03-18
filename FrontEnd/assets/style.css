@@ -3,7 +3,66 @@
    License: none (public domain)
 */
 
+/* --- Section Login --- */
+#login {
+    width: 379px; /* Largeur précise de la maquette */
+    margin: 60px auto; /* Centre le formulaire et l'écarte du header/footer */
+    text-align: center;
+}
 
+/* Supprimer le soulignement par défaut des liens du menu */
+header nav ul li a {
+    text-decoration: none;
+    color: black;
+}
+
+/* Rendre le texte "login" en gras */
+.nav-active {
+    font-weight: 600;
+}
+
+#login h2 {
+    margin-bottom: 30px;
+    color: #1D6154; 
+    font-family: 'Syne';
+    font-weight: 700;
+    font-size: 30px;
+}
+
+#login form {
+    display: flex;
+    flex-direction: column; /* Aligne les labels au-dessus des inputs */
+    text-align: left; /* Les textes des labels restent à gauche */
+}
+
+#login label {
+    margin: 15px 0 5px 0;
+}
+
+#login input {
+    height: 50px;
+    font-size: 1.2em;
+    border: none;
+    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09); /* Ombre légère pour le relief */
+}
+
+#login input[type="submit"] {
+    font-family: 'Syne';
+    font-weight: 700;
+    color: white;
+    background-color: #1D6154;
+    margin: 30px auto;
+    width: 180px;
+    text-align: center;
+    border-radius: 60px;
+    cursor: pointer;
+}
+
+#login a {
+    text-align: center;
+    color: #3D3D3D;
+    text-decoration: underline;
+}
 
 /*boutons filtres*/
 .filters {
