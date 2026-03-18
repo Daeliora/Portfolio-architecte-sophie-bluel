@@ -3,14 +3,14 @@
    License: none (public domain)
 */
 
-/* --- Section Login --- */
+/* ---------------------- Section Login ------------------------- */
 #login {
     width: 379px; /* Largeur précise de la maquette */
-    margin: 60px auto; /* Centre le formulaire et l'écarte du header/footer */
+    margin: 170px auto; /* Centre le formulaire et l'écarte du header/footer */
     text-align: center;
 }
 
-/* Supprimer le soulignement par défaut des liens du menu */
+/* Supprime le soulignement par défaut des liens du menu */
 header nav ul li a {
     text-decoration: none;
     color: black;
@@ -43,7 +43,7 @@ header nav ul li a {
     height: 50px;
     font-size: 1.2em;
     border: none;
-    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09); /* Ombre légère pour le relief */
+    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09); 
 }
 
 #login input[type="submit"] {
@@ -62,6 +62,10 @@ header nav ul li a {
     text-align: center;
     color: #3D3D3D;
     text-decoration: underline;
+}
+
+#login footer {
+
 }
 
 /*boutons filtres*/
@@ -269,9 +273,24 @@ input[type="submit"]{
 	border-radius: 60px ;
 }
 
-footer nav ul {
-	display: flex;
-	justify-content: flex-end;
-	margin: 2em
+footer {
+    background-color: white;
+    display: flex;
+    justify-content: flex-end; /* Aligne le contenu à droite si besoin */
+    margin: 20px 0; /* Ajoute de l'espace en haut et en bas */
+	margin-right: -100px;
+}
+
+footer ul {
+    display: flex;
+    list-style-type: none; /* Enlève la puce du <li> */
+    padding: 0;
+}
+
+footer li {
+    font-family: 'Work Sans';
+    font-size: 14px;
+    color: #3D3D3D;
+    cursor: pointer;
 }
 
