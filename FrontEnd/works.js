@@ -29,13 +29,22 @@ function genererTravaux(travaux) {
     }
 }
 
-async function recupererCategories() {
+// 1. Une fonction dédiée UNIQUEMENT à l'appel API (Réutilisable)
+async function genererCategories() {
     const reponse = await fetch("http://localhost:5678/api/categories");
-    const categories = await reponse.json();
-    genererFiltres(categories);
-}       // attention devrait être en 2 fonctions, recupererCategorie et genererFiltres car peut poser problème plus tard
+    return await reponse.json();
+}
 
-recupererCategories()
+// 2. Une fonction d'initialisation qui orchestre le tout
+async function init() {
+    const categories = await genererCategories();
+    genererFiltres(categories);
+}
+
+// On lance l'application
+init();
+
+
 // ------------- Filtres ---------------------------
 
 function genererFiltres(categories) {
