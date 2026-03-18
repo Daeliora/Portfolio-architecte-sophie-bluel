@@ -17,3 +17,21 @@ async function loginUtilisateur(email, password) {
     }
 }
 
+/** gestion de l'évènement **/
+const loginForm = document.querySelector("#login form");
+
+loginForm.addEventListener("submit", async (event) => {
+    event.preventDefault(); // Empêche le rechargement de la page
+
+    const email = document.querySelector("#email").value;
+    const password = document.querySelector("#password").value;
+
+    const data = await loginUtilisateur(email, password);
+
+    if (data && data.token) {
+        // Enregistre le token pour prouver qu'on est connecté
+        localStorage.setItem("token", data.token);
+        // Redirection vers la page d'accueil
+        window.location.href = "index.html";
+    }
+});
