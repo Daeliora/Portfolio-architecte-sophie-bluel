@@ -3,6 +3,44 @@
    License: none (public domain)
 */
 
+
+/*-----------------------Modale---------------------*/
+.modal {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 2000;
+}
+
+.modal-wrapper {
+    background-color: white;
+    width: 630px;
+    max-width: 95%;
+    height: auto;
+    padding: 60px;
+    border-radius: 10px;
+    position: relative;
+}
+
+.modal-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 5 colonnes comme sur la maquette */
+    gap: 10px;
+    margin-bottom: 40px;
+}
+
+.js-modal-close {
+    position: absolute;
+    top: 30px; right: 30px;
+    border: none; background: none;
+    cursor: pointer;
+    font-size: 20px;
+}
+
 /*------------------- section édition-------------*/
 /* Barre noire en haut */
 #admin-bar {
