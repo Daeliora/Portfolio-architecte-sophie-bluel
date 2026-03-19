@@ -67,6 +67,32 @@ function checkAuthentication() {
     };
 };
 
+function displayAdminMode() {
+    const token = localStorage.getItem("token");
+    const adminElements = document.querySelectorAll(".admin-only");
+    const loginLink = document.getElementById("login-link");
+    const filters = document.querySelector(".filters");
+
+    if (token) {
+        // 1. Affiche tous les éléments réservés à l'admin
+        adminElements.forEach(el => el.classList.remove("hidden"));
+
+        // 2. Cache les filtres (la maquette montre qu'ils disparaissent en mode édition)
+        if (filters) filters.style.display = "none";
+
+        // 3. Transforme "login" en "logout"
+        loginLink.innerText = "logout";
+        loginLink.href = "#"; // Évite la redirection
+        loginLink.addEventListener("click", () => {
+            localStorage.removeItem("token"); // Supprime le token
+            window.location.reload(); // Recharge la page (redevient public)
+        });
+        
+        // Ajustement du header pour laisser de la place à la barre noire
+        document.querySelector("header").style.marginTop = "100px";
+    }
+}
+
 // Pour se logout du mode édition
 function logout() {
     localStorage.removeItem("token"); // supprime la clé

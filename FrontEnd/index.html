@@ -12,7 +12,7 @@
 	<script src="works.js"></script>
 </head>
 <body>
-	<div id="admin-bar" class="hidden">
+	<div id="admin-bar" class="admin-only hidden">
     	<i class="fa-regular fa-pen-to-square"></i>
     	<p>Mode édition</p>
 	</div>
@@ -22,7 +22,7 @@
 		<ul>
 			<li>projets</li>
 			<li>contact</li>
-			<li><a href="login.html">login</a></li>
+			<li><a href="login.html" id="login-link">login</a></li>
 			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 		</ul>
 	</nav>
@@ -40,10 +40,16 @@
 		</article>
 	</section>
 	<section id="portfolio">
-		<h2>Mes Projets</h2>
-		<div class="filters">
-			
+		<div class="project-title">
+    		<h2>Mes Projets</h2>
+    		<a href="#modal" class="admin-only hidden" id="open-modal">
+        		<i class="fa-regular fa-pen-to-square"></i> modifier
+    		</a>
 		</div>
+		
+		<div class="filters">
+		</div>
+		
 		<div class="gallery">
 		</div>
 	</section>
