@@ -27,22 +27,51 @@ function genererTravaux(travaux) {
         figure.appendChild(image);
         figure.appendChild(figcaption);
     }
-}
+};
 
 // 1. Une fonction dédiée UNIQUEMENT à l'appel API (Réutilisable)
 async function genererCategories() {
     const reponse = await fetch("http://localhost:5678/api/categories");
     return await reponse.json();
-}
+};
 
 // 2. Une fonction d'initialisation qui orchestre le tout
 async function init() {
     const categories = await genererCategories();
     genererFiltres(categories);
-}
+};
 
 // On lance l'application
 init();
+
+//---------gestion mode éditeur --------------
+
+function checkAuthentication() {
+    const token = localStorage.getItem("token");
+    const loginLink = document.querySelector("#login-link"); // Ajoute un ID au <a> login dans le HTML
+    const filters = document.querySelector(".filters");
+
+    if (token) {
+        // Change "login" en "logout"
+        loginLink.innerText = "logout";
+        loginLink.addEventListener("click", (e) => {
+            e.preventDefault();
+            logout();
+        });
+
+        // Masque les filtres (comme demandé dans la maquette en mode édition)
+        if (filters) filters.style.display = "none";
+
+        // Affiche les éléments d'édition (la barre noire, les boutons modifier)
+        showAdminElements();
+    };
+};
+
+// Pour se logout du mode édition
+function logout() {
+    localStorage.removeItem("token"); // supprime la clé
+    window.location.reload(); // recharge pour redevenir "public"
+};
 
 
 // ------------- Filtres ---------------------------

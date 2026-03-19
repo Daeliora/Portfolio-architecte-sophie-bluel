@@ -3,6 +3,21 @@
    License: none (public domain)
 */
 
+/*------------------- section édition-------------*/
+#admin-bar {
+    background-color: black;
+    color: white;
+    height: 59px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.hidden {
+    display: none !important;
+}
+
 /* ---------------------- Section Login ------------------------- */
 #login {
     width: 379px; /* Largeur précise de la maquette */
