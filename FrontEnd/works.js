@@ -39,12 +39,15 @@ async function genererCategories() {
 async function init() {
     const categories = await genererCategories();
     genererFiltres(categories);
+
+    // AJOUT : On lance la vérification du mode admin une fois que la page est prête
+    displayAdminMode();
 };
 
 // On lance l'application
 init();
 
-//---------gestion mode éditeur --------------
+//-----------------------gestion mode éditeur ----------------------------
 
 function checkAuthentication() {
     const token = localStorage.getItem("token");
@@ -63,7 +66,7 @@ function checkAuthentication() {
         if (filters) filters.style.display = "none";
 
         // Affiche les éléments d'édition (la barre noire, les boutons modifier)
-        showAdminElements();
+        displayAdminMode();
     };
 };
 
@@ -75,18 +78,20 @@ function displayAdminMode() {
 
     if (token) {
         // 1. Affiche tous les éléments réservés à l'admin
-        adminElements.forEach(el => el.classList.remove("hidden"));
+        adminElements.forEach(el => el.classList.remove("hidden"));     // ??????????????
 
         // 2. Cache les filtres (la maquette montre qu'ils disparaissent en mode édition)
-        if (filters) filters.style.display = "none";
+        if (filters) filters.style.display = "none";    
 
         // 3. Transforme "login" en "logout"
-        loginLink.innerText = "logout";
-        loginLink.href = "#"; // Évite la redirection
-        loginLink.addEventListener("click", () => {
-            localStorage.removeItem("token"); // Supprime le token
-            window.location.reload(); // Recharge la page (redevient public)
-        });
+        if (loginLink) {
+            loginLink.innerText = "logout";
+            loginLink.href = "#"; 
+            loginLink.addEventListener("click", (e) => {
+                e.preventDefault();
+                logout();
+            });
+        }
         
         // Ajustement du header pour laisser de la place à la barre noire
         document.querySelector("header").style.marginTop = "100px";
