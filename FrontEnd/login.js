@@ -27,7 +27,8 @@ loginForm.addEventListener("submit", async (event) => {
     const password = document.querySelector("#password").value;
 
     const data = await loginUtilisateur(email, password);
-
+    
+    // redirige vers index une fois connecté 
     if (data && data.token) {
         // Enregistre le token pour prouver qu'on est connecté
         localStorage.setItem("token", data.token);
