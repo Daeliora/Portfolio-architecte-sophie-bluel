@@ -29,19 +29,20 @@ function genererTravaux(travaux) {
     }
 };
 
-// 1. Une fonction dédiée UNIQUEMENT à l'appel API (Réutilisable)
+// fonction dédiée UNIQUEMENT à l'appel API (Réutilisable)
 async function genererCategories() {
     const reponse = await fetch("http://localhost:5678/api/categories");
     return await reponse.json();
 };
 
-// 2. Une fonction d'initialisation qui orchestre le tout
+// fonction d'initialisation qui orchestre le tout
 async function init() {
     const categories = await genererCategories();
     genererFiltres(categories);
 
     // AJOUT : On lance la vérification du mode admin une fois que la page est prête
     displayAdminMode();
+    setupModal();
 };
 
 // On lance l'application
@@ -170,3 +171,56 @@ function openModal() {
         modal.style.display = "none";
     });
 }
+
+/** 1. Fonction pour afficher la galerie dans la modale **/
+async function displayModalGallery() {
+    const modalGrid = document.querySelector(".modal-grid");
+    modalGrid.innerHTML = ""; // On vide la grille avant d'afficher
+
+    // On récupère les travaux (on réutilise l'API)
+    const response = await fetch("http://localhost:5678/api/works");
+    const travaux = await response.json();
+
+    travaux.forEach(projet => {
+        const figure = document.createElement("figure");
+        figure.setAttribute("data-id", projet.id);
+
+        const img = document.createElement("img");
+        img.src = projet.imageUrl;
+        img.alt = projet.title;
+
+        // Création du bouton de suppression (la poubelle)
+        const deleteBtn = document.createElement("button");
+        deleteBtn.classList.add("delete-icon");
+        deleteBtn.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
+        
+        // On attache l'événement de suppression (étape 6.2)
+        deleteBtn.addEventListener("click", () => deleteWork(projet.id));
+
+        figure.appendChild(img);
+        figure.appendChild(deleteBtn);
+        modalGrid.appendChild(figure);
+    });
+}
+
+/** 2. Fonction pour ouvrir la modale **/
+function setupModal() {
+    const modal = document.getElementById("modal");
+    const openModalBtn = document.getElementById("open-modal");
+    const closeModalBtn = document.querySelector(".js-modal-close");
+
+    if (openModalBtn) {
+        openModalBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            modal.style.display = "flex";
+            displayModalGallery(); // On charge la galerie à l'ouverture
+        });
+    }
+
+    // Fermeture
+    closeModalBtn.addEventListener("click", () => modal.style.display = "none");
+    modal.addEventListener("click", (e) => {
+        if (e.target === modal) modal.style.display = "none";
+    });
+}
+
