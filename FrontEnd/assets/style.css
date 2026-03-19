@@ -26,7 +26,7 @@
     justify-content: center;
     align-items: center;
     gap: 30px;
-    margin-bottom: 30px;
+    margin: 50px;
 }
 
 #open-modal {
@@ -186,7 +186,7 @@ header {
 	margin: 50px 0
 }
 section {
-	margin: 50px 0
+	margin: 90px 0
 }
 
 h1{
@@ -250,8 +250,8 @@ li:hover {
 }
 #portfolio h2 {
 	text-align: center;
-	margin-bottom: 1em;
 }
+
 .gallery {
 	width: 100%;
 	display: grid;
