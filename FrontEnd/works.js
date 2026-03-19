@@ -149,3 +149,24 @@ async function filtrerTravaux(idCategorie) {
     genererTravaux(travauxFiltres);
 }
 
+function openModal() {
+    const modal = document.getElementById("modal");
+    const openModalBtn = document.getElementById("open-modal");
+
+    if (openModalBtn) {
+        openModalBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            modal.style.display = "flex";
+            displayModalGallery(); // On affichera les photos ici
+        });
+    }
+
+    // Fermeture sur la croix ou à côté de la modale
+    modal.addEventListener("click", (e) => {
+        if (e.target === modal) modal.style.display = "none";
+    });
+    
+    document.querySelector(".js-modal-close").addEventListener("click", () => {
+        modal.style.display = "none";
+    });
+}
