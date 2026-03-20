@@ -149,6 +149,9 @@ async function filtrerTravaux(idCategorie) {
     genererTravaux(travauxFiltres);
 }
 
+
+//----------------------------modale------------------------------------
+
 function openModal() {
     const modal = document.getElementById("modal");
     const openModalBtn = document.getElementById("open-modal");
@@ -157,7 +160,7 @@ function openModal() {
         openModalBtn.addEventListener("click", (e) => {
             e.preventDefault();
             modal.style.display = "flex";
-            displayModalGallery(); // On affichera les photos ici
+            displayModalGallery(); // appel pour afficherer les photos ici
         });
     }
 
@@ -171,7 +174,6 @@ function openModal() {
     });
 }
 
-//-----------------------modale-----------------------
 
 // fonction pour afficher la galerie dans la modale 
 async function displayModalGallery() {

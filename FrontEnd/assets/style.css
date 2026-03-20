@@ -20,8 +20,8 @@
     background-color: white;
     width: 630px;
     max-width: 95%;
-    height: auto;
-    padding: 60px;
+    height: 668px;
+    padding: 10px;
     border-radius: 10px;
     position: relative;
 }
@@ -29,8 +29,8 @@
 .modal-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr); /* 5 colonnes */
-    gap: 10px;
-    padding: 20px 0 40px 0;
+    /*gap: 30px;*/
+    padding: 40px 89px 10px 100px;
 }
 
 .js-modal-close {
@@ -43,13 +43,15 @@
 
 .modal-grid figure {
     position: relative; /* pour placer la poubelle par-dessus */
-    width: 100%;
+    width: 78px;
+    margin-bottom: 20px;
 }
 
 .modal-grid img {
     width: 100%;
-    height: 100px;
+    height: 103px;
     object-fit: cover; 
+    margin-bottom: 10px;
 }
 
 /* Le bouton poubelle */
@@ -70,7 +72,20 @@
     border: none;
 }
 
-/*------------------- section édition-------------*/
+#btn-add-photo {
+    margin: 30px;
+}
+
+#modal-gallery h3 {
+    margin: 30px;
+}
+
+#modal-gallery hr {
+    color: #B3B3B3;
+    width: 420px;
+}
+
+/*------------------- mode édition-------------*/
 /* Barre noire en haut */
 #admin-bar {
     width: 100%;
