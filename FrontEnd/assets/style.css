@@ -20,7 +20,7 @@
     background-color: white;
     width: 630px;
     max-width: 95%;
-    height: 668px;
+    height: 700px;
     padding: 10px;
     border-radius: 10px;
     position: relative;
@@ -30,7 +30,7 @@
     display: grid;
     grid-template-columns: repeat(5, 1fr); /* 5 colonnes */
     /*gap: 30px;*/
-    padding: 40px 89px 10px 100px;
+    padding: 40px 89px 30px 100px;
 }
 
 .js-modal-close {
@@ -77,7 +77,7 @@
 }
 
 #modal-gallery h3 {
-    margin: 30px;
+    margin: 40px;
 }
 
 #modal-gallery hr {
