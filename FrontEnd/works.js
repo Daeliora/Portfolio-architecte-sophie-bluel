@@ -40,12 +40,11 @@ async function init() {
     const categories = await genererCategories();
     genererFiltres(categories);
 
-    // AJOUT : On lance la vérification du mode admin une fois que la page est prête
     displayAdminMode();
     setupModal();
 };
 
-// On lance l'application
+// lance l'application
 init();
 
 //-----------------------gestion mode éditeur ----------------------------
@@ -106,7 +105,7 @@ function logout() {
 };
 
 
-// ------------- Filtres ---------------------------
+// --------------------------------- Filtres ---------------------------
 
 function genererFiltres(categories) {
     const divFilters = document.querySelector(".filters"); // div dans HTML
@@ -172,12 +171,14 @@ function openModal() {
     });
 }
 
-/** 1. Fonction pour afficher la galerie dans la modale **/
+//-----------------------modale-----------------------
+
+// fonction pour afficher la galerie dans la modale 
 async function displayModalGallery() {
     const modalGrid = document.querySelector(".modal-grid");
     modalGrid.innerHTML = ""; // On vide la grille avant d'afficher
 
-    // On récupère les travaux (on réutilise l'API)
+    // récupère les travaux via API
     const response = await fetch("http://localhost:5678/api/works");
     const travaux = await response.json();
 
@@ -189,12 +190,12 @@ async function displayModalGallery() {
         img.src = projet.imageUrl;
         img.alt = projet.title;
 
-        // Création du bouton de suppression (la poubelle)
+        // création du bouton poubelle
         const deleteBtn = document.createElement("button");
         deleteBtn.classList.add("delete-icon");
         deleteBtn.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
         
-        // On attache l'événement de suppression (étape 6.2)
+        // attache l'événement de suppression 
         deleteBtn.addEventListener("click", () => deleteWork(projet.id));
 
         figure.appendChild(img);
@@ -203,7 +204,7 @@ async function displayModalGallery() {
     });
 }
 
-/** 2. Fonction pour ouvrir la modale **/
+// fonction pour ouvrir la modale 
 function setupModal() {
     const modal = document.getElementById("modal");
     const openModalBtn = document.getElementById("open-modal");

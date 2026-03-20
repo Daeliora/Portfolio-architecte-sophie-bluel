@@ -42,14 +42,14 @@
 }
 
 .modal-grid figure {
-    position: relative; /* Indispensable pour placer la poubelle par-dessus */
+    position: relative; /* pour placer la poubelle par-dessus */
     width: 100%;
 }
 
 .modal-grid img {
     width: 100%;
     height: 100px;
-    object-fit: cover; /* Évite de déformer les images */
+    object-fit: cover; 
 }
 
 /* Le bouton poubelle */
@@ -169,7 +169,7 @@ header nav ul li a {
 }
 
 
-/*boutons filtres*/
+/*--------------------------boutons filtres--------------------------*/
 .filters {
 	display: flex;
     justify-content: center;
