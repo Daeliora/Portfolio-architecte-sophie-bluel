@@ -259,17 +259,21 @@ function setupModalNavigation() {
     });
 }
 
-
+// --------------------- Preview d'une image à ajouter - Modale -------------------
 // Fonction pour gérer l'aperçu de la photo sélectionnée
 function setupImagePreview() {
     const fileInput = document.getElementById("file-upload");
     const previewImage = document.getElementById("image-preview");
     const container = document.querySelector(".upload-container");
 
+    // => le déclencheur : change
     fileInput.addEventListener("change", () => {
+        // => récupère le fichier : files[0]
         const file = fileInput.files[0];
         if (file) {
+            // => le "lecteur" : new FileReader()
             const reader = new FileReader();
+            // => la préparation : reader.onload
             reader.onload = (e) => {
                 previewImage.src = e.target.result;
                 previewImage.classList.remove("hidden");
@@ -277,15 +281,16 @@ function setupImagePreview() {
                 // en ajoutant une classe "preview-active" au container
                 container.classList.add("preview-mode");
             };
+            // => l'ordre de lecture : readAsDataURL
             reader.readAsDataURL(file);
         }
     });
 }
 
-// Fonction pour remplir le menu déroulant des catégories
+// Fonction pour remplir le menu déroulant des catégories, Remplir le <select> avec les catégories de l'API
 async function displayCategoriesInSelect() {
     const select = document.getElementById("photo-category");
-    const categories = await genererCategories(); // On utilise ta fonction existante
+    const categories = await genererCategories(); // On utilise la fonction existante
 
     // On s'assure que le select est vide (sauf l'option vide par défaut)
     select.innerHTML = '<option value=""></option>';
