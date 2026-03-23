@@ -110,7 +110,7 @@
 /*----------------------------Ajout dans modale --------------------------*/
 
 #modal-add h3 {
-    margin-top: 20px;
+    margin-top: 5px;
     margin-bottom: 40px;
     font-family: Work Sans;
     font-size: 26px;
@@ -221,7 +221,7 @@
     border: none;
     background-color: white;
     font-size: 25px;
-    margin-top: 15px;
+    margin-top: 20px;
     margin-left: 20px;
 }
 
