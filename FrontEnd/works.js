@@ -43,6 +43,9 @@ async function init() {
     displayAdminMode();
     setupModal();
     setupModalNavigation();
+
+    setupImagePreview();
+    displayCategoriesInSelect();
 };
 
 // lance l'application
@@ -151,7 +154,7 @@ async function filtrerTravaux(idCategorie) {
 }
 
 
-//----------------------------modale------------------------------------
+//------------------------------------------- Modale ------------------------------------
 
 function openModal() {
     const modal = document.getElementById("modal");
@@ -228,6 +231,7 @@ function setupModal() {
     });
 }
 
+//------------------------------Ajout photo - Modale ------------------------
 //fonction de navigation dans la modale
 function setupModalNavigation() {
     const btnAddPhoto = document.getElementById("btn-add-photo");
@@ -255,3 +259,41 @@ function setupModalNavigation() {
     });
 }
 
+
+// Fonction pour gérer l'aperçu de la photo sélectionnée
+function setupImagePreview() {
+    const fileInput = document.getElementById("file-upload");
+    const previewImage = document.getElementById("image-preview");
+    const container = document.querySelector(".upload-container");
+
+    fileInput.addEventListener("change", () => {
+        const file = fileInput.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                previewImage.src = e.target.result;
+                previewImage.classList.remove("hidden");
+                // On cache les éléments par défaut (icône, bouton, texte)
+                // en ajoutant une classe "preview-active" au container
+                container.classList.add("preview-mode");
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+}
+
+// Fonction pour remplir le menu déroulant des catégories
+async function displayCategoriesInSelect() {
+    const select = document.getElementById("photo-category");
+    const categories = await genererCategories(); // On utilise ta fonction existante
+
+    // On s'assure que le select est vide (sauf l'option vide par défaut)
+    select.innerHTML = '<option value=""></option>';
+
+    categories.forEach(category => {
+        const option = document.createElement("option");
+        option.value = category.id;
+        option.innerText = category.name;
+        select.appendChild(option);
+    });
+}

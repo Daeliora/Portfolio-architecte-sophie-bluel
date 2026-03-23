@@ -233,7 +233,21 @@
     font-size: 20px;
 }
 
-/*------------------- mode édition-------------*/
+/* Cache tout dans le container quand on est en mode preview */
+.upload-container.preview-mode i,
+.upload-container.preview-mode label,
+.upload-container.preview-mode p {
+    display: none;
+}
+
+/* L'image prend toute la place disponible */
+#image-preview {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+/*--------------------------- mode édition---------------------------------------*/
 /* Barre noire en haut */
 #admin-bar {
     width: 100%;
