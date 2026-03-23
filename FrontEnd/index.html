@@ -90,10 +90,36 @@
             <button id="btn-add-photo">Ajouter une photo</button>
         </div>
 
-        <div id="modal-add" class="modal-content" style="display:none;">
-            <button class="js-modal-back"><i class="fa-solid fa-arrow-left"></i></button>
-            <h3>Ajout photo</h3>
+       <div id="modal-add" class="modal-content" style="display:none;">
+    <button class="js-modal-back"><i class="fa-solid fa-arrow-left"></i></button>
+    <button class="js-modal-close"><i class="fa-solid fa-xmark"></i></button>
+    <h3>Ajout photo</h3>
+    
+    <form id="form-add-photo" action="#" method="post">
+        <div class="upload-container">
+            <i class="fa-regular fa-image"></i>
+            <label for="file-upload" class="custom-file-upload">+ Ajouter photo</label>
+            <input id="file-upload" type="file" accept="image/png, image/jpeg" />
+            <p>jpg, png : 4mo max</p>
+            <img id="image-preview" src="#" alt="Aperçu" class="hidden">
         </div>
+
+        <div class="input-group">
+            <label for="photo-title">Titre</label>
+            <input type="text" id="photo-title" required>
+        </div>
+
+        <div class="input-group">
+            <label for="photo-category">Catégorie</label>
+            <select id="photo-category" required>
+                <option value=""></option>
+                </select>
+        </div>
+
+        <hr>
+        <input type="submit" value="Valider" id="btn-validate" disabled>
+    </form>
+</div>
     </div>
 </aside>
 
