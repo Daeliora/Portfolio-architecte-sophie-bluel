@@ -224,6 +224,14 @@
     margin-left: 20px;
 }
 
+.js-modal-add-close {
+     position: absolute;
+    top: 30px; right: 30px;
+    border: none; background: none;
+    cursor: pointer;
+    font-size: 20px;
+}
+
 /*------------------- mode édition-------------*/
 /* Barre noire en haut */
 #admin-bar {

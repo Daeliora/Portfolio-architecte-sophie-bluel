@@ -234,6 +234,7 @@ function setupModalNavigation() {
     const btnBack = document.querySelector(".js-modal-back");
     const viewGallery = document.getElementById("modal-gallery");
     const viewAdd = document.getElementById("modal-add");
+    const closeModalBtn = document.querySelector(".js-modal-add-close");
 
     // Aller vers l'ajout
     btnAddPhoto.addEventListener("click", () => {
@@ -245,6 +246,12 @@ function setupModalNavigation() {
     btnBack.addEventListener("click", () => {
         viewAdd.style.display = "none";
         viewGallery.style.display = "block";
+    });
+
+    // Fermeture
+    closeModalBtn.addEventListener("click", () => modal.style.display = "none");
+    modal.addEventListener("click", (e) => {
+        if (e.target === modal) modal.style.display = "none";
     });
 }
 
