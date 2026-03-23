@@ -107,18 +107,32 @@
     border: none;
 }
 
-/*----------------------------Ajout dans modale --------------------------
+/*----------------------------Ajout dans modale --------------------------*/
+
+#modal-add h3 {
+    margin-top: 35px;
+    margin-bottom: 40px;
+    font-family: Work Sans;
+    font-size: 26px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 /* Container de téléchargement */
 .upload-container {
     background-color: #E8F1F6;
     border-radius: 3px;
     height: 170px;
+    width: 420px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-bottom: 30px;
+    margin-bottom: 40px;
     position: relative;
+    margin-left: 105px;
+    margin-top: 30px;
 }
 
 .upload-container i {
@@ -126,13 +140,20 @@
     color: #B9C5CC;
 }
 
+.upload-container p {
+    font-size: 10px;
+    color: #444444;
+}
+
 .custom-file-upload {
     background-color: #CBD6DC;
     color: #306685;
-    padding: 10px 30px;
+    padding: 12px 40px;
     border-radius: 50px;
     cursor: pointer;
     margin: 10px 0;
+    font-size: 14px;
+    font-weight: 500;
 }
 
 #file-upload {
@@ -152,15 +173,29 @@
     display: flex;
     flex-direction: column;
     text-align: left;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
+    width: 420px;
+    margin-left: 105px;
+    font-size: 14px;
 }
 
-.input-group label { margin-bottom: 10px; }
+.input-group label { 
+    margin-bottom: 15px; 
+}
 
 .input-group input, .input-group select {
     height: 50px;
     border: none;
     box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+#modal-add hr {
+    background-color: #B3B3B3;
+    width: 420px;
+    border: none;
+    height: 1px;
+    margin-top: 50px;
+    margin-bottom: 35px;
 }
 
 /* Bouton valider (gris par défaut, vert si rempli) */
@@ -178,6 +213,14 @@
 #btn-validate.active {
     background-color: #1D6154;
     cursor: pointer;
+}
+
+.js-modal-back {
+    border: none;
+    background-color: white;
+    font-size: 25px;
+    margin-top: 15px;
+    margin-left: 20px;
 }
 
 /*------------------- mode édition-------------*/
