@@ -208,6 +208,7 @@
     cursor: not-allowed;
     margin: 20px auto;
     display: block;
+    width: 250px;
 }
 
 #btn-validate.active {
