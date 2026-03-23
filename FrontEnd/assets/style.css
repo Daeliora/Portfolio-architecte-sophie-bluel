@@ -4,7 +4,7 @@
 */
 
 
-/*-----------------------Modale---------------------*/
+/*-----------------------Gallerie Modale---------------------*/
 .modal {
     position: fixed;
     display: flex;
@@ -105,6 +105,79 @@
     justify-content: center;
     align-items: center;
     border: none;
+}
+
+/*----------------------------Ajout dans modale --------------------------
+/* Container de téléchargement */
+.upload-container {
+    background-color: #E8F1F6;
+    border-radius: 3px;
+    height: 170px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.upload-container i {
+    font-size: 60px;
+    color: #B9C5CC;
+}
+
+.custom-file-upload {
+    background-color: #CBD6DC;
+    color: #306685;
+    padding: 10px 30px;
+    border-radius: 50px;
+    cursor: pointer;
+    margin: 10px 0;
+}
+
+#file-upload {
+    display: none; /* On cache l'input moche par défaut */
+}
+
+/* Aperçu de l'image une fois choisie */
+#image-preview {
+    position: absolute;
+    height: 100%;
+    width: auto;
+    top: 0;
+}
+
+/* Champs de texte et select */
+.input-group {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.input-group label { margin-bottom: 10px; }
+
+.input-group input, .input-group select {
+    height: 50px;
+    border: none;
+    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+/* Bouton valider (gris par défaut, vert si rempli) */
+#btn-validate {
+    background-color: #A7A7A7;
+    border: none;
+    color: white;
+    padding: 10px 50px;
+    border-radius: 60px;
+    cursor: not-allowed;
+    margin: 20px auto;
+    display: block;
+}
+
+#btn-validate.active {
+    background-color: #1D6154;
+    cursor: pointer;
 }
 
 /*------------------- mode édition-------------*/
