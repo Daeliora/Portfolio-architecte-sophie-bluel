@@ -42,6 +42,7 @@ async function init() {
 
     displayAdminMode();
     setupModal();
+    setupModalNavigation();
 };
 
 // lance l'application
@@ -224,6 +225,26 @@ function setupModal() {
     closeModalBtn.addEventListener("click", () => modal.style.display = "none");
     modal.addEventListener("click", (e) => {
         if (e.target === modal) modal.style.display = "none";
+    });
+}
+
+//fonction de navigation dans la modale
+function setupModalNavigation() {
+    const btnAddPhoto = document.getElementById("btn-add-photo");
+    const btnBack = document.querySelector(".js-modal-back");
+    const viewGallery = document.getElementById("modal-gallery");
+    const viewAdd = document.getElementById("modal-add");
+
+    // Aller vers l'ajout
+    btnAddPhoto.addEventListener("click", () => {
+        viewGallery.style.display = "none";
+        viewAdd.style.display = "block";
+    });
+
+    // Revenir à la galerie
+    btnBack.addEventListener("click", () => {
+        viewAdd.style.display = "none";
+        viewGallery.style.display = "block";
     });
 }
 
