@@ -337,7 +337,58 @@ function checkFormValidity() {
         fileInput.addEventListener("change", checkFormValidity);
         titleInput.addEventListener("input", checkFormValidity);
         categorySelect.addEventListener("change", checkFormValidity);
+
+        // écoute évènement bouton pour ajout
+        const form = document.getElementById("form-add-photo");
+        form.addEventListener("submit", addProject);
     }
 
 //--------------Envoyer un nouveau travail --------------
+async function addProject(e) {
+    e.preventDefault(); // Empêche le rechargement de la page
 
+    const token = localStorage.getItem("token");
+    const title = document.getElementById("photo-title").value;
+    const category = document.getElementById("photo-category").value;
+    const fileField = document.getElementById("file-upload").files[0];
+
+    // On utilise FormData car on envoie un fichier (image)
+    const formData = new FormData();
+    formData.append("image", fileField);
+    formData.append("title", title);
+    formData.append("category", category);
+
+    try {
+        const response = await fetch("http://localhost:5678/api/works", {
+            method: "POST",
+            headers: {
+                "Authorization": `Bearer ${token}`
+            },
+            body: formData
+        });
+
+        if (response.ok) {
+            // vide le formulaire et l'aperçu
+            document.getElementById("form-add-photo").reset();
+            document.getElementById("image-preview").classList.add("hidden");
+            document.querySelector(".upload-container i").style.display = "block";
+            document.querySelector(".custom-file-upload").style.display = "block";
+            
+            // rafraîchit les galeries (principale + modale)
+            document.querySelector(".gallery").innerHTML = "";
+            document.querySelector(".modal-grid").innerHTML = "";
+            await recupererTravaux(); // Cette fonction recharge tout
+            displayModalGallery();
+
+            // retour à la vue galerie de la modale
+            document.getElementById("modal-add").style.display = "none";
+            document.getElementById("modal-gallery").style.display = "block";
+            
+            alert("Projet ajouté avec succès !");
+        } else {
+            alert("Erreur lors de l'ajout du projet.");
+        }
+    } catch (error) {
+        console.error("Erreur réseau :", error);
+    }
+}
