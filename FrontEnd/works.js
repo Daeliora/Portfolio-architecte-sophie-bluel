@@ -46,6 +46,8 @@ async function init() {
 
     setupImagePreview();
     displayCategoriesInSelect();
+
+    setupFormValidation();
 };
 
 // lance l'application
@@ -257,6 +259,8 @@ function setupModalNavigation() {
     modal.addEventListener("click", (e) => {
         if (e.target === modal) modal.style.display = "none";
     });
+
+   
 }
 
 // --------------------- Preview d'une image à ajouter - Modale -------------------
@@ -302,3 +306,37 @@ async function displayCategoriesInSelect() {
         select.appendChild(option);
     });
 }
+
+// pour dégrisser le bouton "valider" quand les critères requis sont mis
+function checkFormValidity() {
+    const fileInput = document.getElementById("file-upload");
+    const titleInput = document.getElementById("photo-title");
+    const categorySelect = document.getElementById("photo-category");
+    const submitBtn = document.getElementById("btn-validate");
+
+    // On vérifie si tout est rempli
+    const isFileReady = fileInput.files.length > 0;
+    const isTitleReady = titleInput.value.trim() !== "";
+    const isCategoryReady = categorySelect.value !== "";
+
+    if (isFileReady && isTitleReady && isCategoryReady) {
+        submitBtn.disabled = false;
+        submitBtn.classList.add("active"); // Devient vert via le CSS
+    } else {
+        submitBtn.disabled = true;
+        submitBtn.classList.remove("active"); // Reste gris
+    }
+}
+
+ function setupFormValidation() {
+        const fileInput = document.getElementById("file-upload");
+        const titleInput = document.getElementById("photo-title");
+        const categorySelect = document.getElementById("photo-category");
+
+        // On surveille chaque champ
+        fileInput.addEventListener("change", checkFormValidity);
+        titleInput.addEventListener("input", checkFormValidity);
+        categorySelect.addEventListener("change", checkFormValidity);
+    }
+
+

@@ -213,7 +213,7 @@
 }
 
 #btn-validate.active {
-    background-color: #1D6154;
+    background-color: #1D6154 !important;
     cursor: pointer;
 }
 
