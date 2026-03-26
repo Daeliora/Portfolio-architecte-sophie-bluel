@@ -204,7 +204,13 @@ async function displayModalGallery() {
         deleteBtn.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
         
         // attache l'événement de suppression 
-        deleteBtn.addEventListener("click", () => deleteWork(projet.id));
+        //deleteBtn.addEventListener("click", () => deleteWork(projet.id));
+        deleteBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            if (confirm("Voulez-vous vraiment supprimer ce projet ?")) {
+                supprimerProjet(projet.id, figure);
+            }
+        });
 
         figure.appendChild(img);
         figure.appendChild(deleteBtn);
@@ -392,3 +398,31 @@ async function addProject(e) {
         console.error("Erreur réseau :", error);
     }
 }
+
+// ------------------------ Suppression de projets -----------------------------
+async function supprimerProjet(id, figureElement) {
+    const token = localStorage.getItem("token");
+
+    const response = await fetch(`http://localhost:5678/api/works/${id}`, {
+        method: "DELETE",
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    });
+
+    if (response.ok) {
+        // --- MISE À JOUR DU DOM SANS RECHARGER ---
+        // On retire l'élément de la modale
+        figureElement.remove();
+        
+        // On rafraîchit la galerie principale pour que la photo disparaisse aussi là-bas
+        document.querySelector(".gallery").innerHTML = "";
+        recupererTravaux(); 
+        
+        console.log(`Le projet ${id} a été supprimé`);
+    } else {
+        alert("Erreur lors de la suppression du projet.");
+    }
+}
+
+

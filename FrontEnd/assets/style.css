@@ -511,6 +511,9 @@ li:hover {
     display: block;
 
 }
+.gallery figcaption {
+    padding-top: 7px;
+}
 #contact {
 	width: 50%;
 margin: auto;
