@@ -307,7 +307,7 @@ async function displayCategoriesInSelect() {
     });
 }
 
-// pour dégrisser le bouton "valider" quand les critères requis sont mis
+// -----------pour dégrisser le bouton "valider" quand les critères requis sont mis----------
 function checkFormValidity() {
     const fileInput = document.getElementById("file-upload");
     const titleInput = document.getElementById("photo-title");
@@ -339,4 +339,5 @@ function checkFormValidity() {
         categorySelect.addEventListener("change", checkFormValidity);
     }
 
+//--------------Envoyer un nouveau travail --------------
 
