@@ -1,26 +1,25 @@
-async function recupererTravaux() {
+async function getWorks() {
     const reponse = await fetch("http://localhost:5678/api/works");
-    const travaux = await reponse.json();
-    console.log(travaux); // Pour vérifier qu'on reçoit bien les données
-    genererTravaux(travaux);
+    const works = await reponse.json();
+    generateWorks(works);
 }
 
-recupererTravaux();
+getWorks();
 
-function genererTravaux(travaux) {
+function generateWorks(works) {
     const divGallery = document.querySelector(".gallery");
 
-    for (let i = 0; i < travaux.length; i++) {
-        const projet = travaux[i];
+    for (let i = 0; i < works.length; i++) {
+        const project = works[i];
         
         // Création des balises
         const figure = document.createElement("figure");
         const image = document.createElement("img");
-        image.src = projet.imageUrl;
-        image.alt = projet.title;
+        image.src = project.imageUrl;
+        image.alt = project.title;
         
         const figcaption = document.createElement("figcaption");
-        figcaption.innerText = projet.title;
+        figcaption.innerText = project.title;
 
         // On rattache les balises au DOM
         divGallery.appendChild(figure);
@@ -30,15 +29,15 @@ function genererTravaux(travaux) {
 };
 
 // fonction dédiée UNIQUEMENT à l'appel API (Réutilisable)
-async function genererCategories() {
+async function generateCategories() {
     const reponse = await fetch("http://localhost:5678/api/categories");
     return await reponse.json();
 };
 
 // fonction d'initialisation qui orchestre le tout
 async function init() {
-    const categories = await genererCategories();
-    genererFiltres(categories);
+    const categories = await generateCategories();
+    generateFilters(categories);
 
     displayAdminMode();
     setupModal();
@@ -113,46 +112,46 @@ function logout() {
 
 // --------------------------------- Filtres ---------------------------
 
-function genererFiltres(categories) {
+function generateFilters(categories) {
     const divFilters = document.querySelector(".filters"); // div dans HTML
 
     // Création du bouton "Tous"
-    const boutonTous = document.createElement("button");
-    boutonTous.innerText = "Tous";
-    boutonTous.classList.add("btn-filter", "active"); // Ajout classes CSS
-    divFilters.appendChild(boutonTous);
+    const buttonAll = document.createElement("button");
+    buttonAll.innerText = "Tous";
+    buttonAll.classList.add("btn-filter", "active"); // Ajout classes CSS
+    divFilters.appendChild(buttonAll);
 
-    boutonTous.addEventListener("click", () => {
+    buttonAll.addEventListener("click", () => {
         document.querySelector(".gallery").innerHTML = ""; // vide la galerie
-        recupererTravaux(); // On recharge tout
+        getWorks(); // On recharge tout
     });
    
     
     // Création des boutons par catégorie
     categories.forEach(categorie => {
-        const bouton = document.createElement("button");
-        bouton.innerText = categorie.name;
-        bouton.classList.add("btn-filter");
+        const button = document.createElement("button");
+        button.innerText = categorie.name;
+        button.classList.add("btn-filter");
        
 
-        bouton.addEventListener("click", () => {
-            filtrerTravaux(categorie.id);
+        button.addEventListener("click", () => {
+            filterWorks(categorie.id);
         
         });
-         divFilters.appendChild(bouton);
+         divFilters.appendChild(button);
     });
 }
 
-async function filtrerTravaux(idCategorie) {
+async function filterWorks(idCategorie) {
     const reponse = await fetch("http://localhost:5678/api/works");
-    const travaux = await reponse.json();
+    const works = await reponse.json();
     
     // filtre la liste
-    const travauxFiltres = travaux.filter(travail => travail.categoryId === idCategorie);
+    const WorksFiltered = works.filter(work => work.categoryId === idCategorie);
 
     // vide la galerie et on réaffiche seulement les bons
     document.querySelector(".gallery").innerHTML = "";
-    genererTravaux(travauxFiltres);
+    generateWorks(WorksFiltered);
 }
 
 
@@ -188,15 +187,15 @@ async function displayModalGallery() {
 
     // récupère les travaux via API
     const response = await fetch("http://localhost:5678/api/works");
-    const travaux = await response.json();
+    const works = await response.json();
 
-    travaux.forEach(projet => {
+    works.forEach(project => {
         const figure = document.createElement("figure");
-        figure.setAttribute("data-id", projet.id);
+        figure.setAttribute("data-id", project.id);
 
         const img = document.createElement("img");
-        img.src = projet.imageUrl;
-        img.alt = projet.title;
+        img.src = project.imageUrl;
+        img.alt = project.title;
 
         // création du bouton poubelle
         const deleteBtn = document.createElement("button");
@@ -208,7 +207,7 @@ async function displayModalGallery() {
         deleteBtn.addEventListener("click", (e) => {
             e.preventDefault();
             if (confirm("Voulez-vous vraiment supprimer ce projet ?")) {
-                supprimerProjet(projet.id, figure);
+                deleteWorks(project.id, figure);
             }
         });
 
@@ -300,7 +299,7 @@ function setupImagePreview() {
 // Fonction pour remplir le menu déroulant des catégories, Remplir le <select> avec les catégories de l'API
 async function displayCategoriesInSelect() {
     const select = document.getElementById("photo-category");
-    const categories = await genererCategories(); // On utilise la fonction existante
+    const categories = await generateCategories(); // On utilise la fonction existante
 
     // On s'assure que le select est vide (sauf l'option vide par défaut)
     select.innerHTML = '<option value=""></option>';
@@ -383,7 +382,7 @@ async function addProject(e) {
             // rafraîchit les galeries (principale + modale)
             document.querySelector(".gallery").innerHTML = "";
             document.querySelector(".modal-grid").innerHTML = "";
-            await recupererTravaux(); // Cette fonction recharge tout
+            await getWorks(); // Cette fonction recharge tout
             displayModalGallery();
 
             // retour à la vue galerie de la modale
@@ -400,7 +399,7 @@ async function addProject(e) {
 }
 
 // ------------------------ Suppression de projets -----------------------------
-async function supprimerProjet(id, figureElement) {
+async function deleteWorks(id, figureElement) {
     const token = localStorage.getItem("token");
 
     const response = await fetch(`http://localhost:5678/api/works/${id}`, {
@@ -417,7 +416,7 @@ async function supprimerProjet(id, figureElement) {
         
         // On rafraîchit la galerie principale pour que la photo disparaisse aussi là-bas
         document.querySelector(".gallery").innerHTML = "";
-        recupererTravaux(); 
+        getWorks(); 
         
         console.log(`Le projet ${id} a été supprimé`);
     } else {
