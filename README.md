@@ -18,3 +18,6 @@ Ouvrir le dossier Frontend et lancer liveserver de votre IDE
 ## Astuce
  
 Si vous désirez afficher le code du backend et du frontend, faites le dans 2 instances de VSCode différentes pour éviter tout problème
+
+## Lien github
+https://github.com/Daeliora/Portfolio-architecte-sophie-bluel.git
