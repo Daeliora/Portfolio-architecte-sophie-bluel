@@ -281,12 +281,37 @@ function setupImagePreview() {
     const fileInput = document.getElementById("file-upload")
     const previewImage = document.getElementById("image-preview")
     const container = document.querySelector(".upload-container")
+    const errorMsg = document.getElementById("error-message")
 
     // => le déclencheur : change
     fileInput.addEventListener("change", () => {
         // => récupère le fichier : files[0]
         const file = fileInput.files[0]
+        const maxFileSize = 4 * 1024 * 1024; // 4 Mo en octets
+        const validTypes = ["image/jpeg", "image/png"]
+
+        // 1. On réinitialise l'affichage à chaque changement
+        errorMsg.classList.add("hidden");
+        errorMsg.innerText = "";
+
         if (file) {
+            // --- VÉRIFICATION DU FORMAT ---
+            if (!validTypes.includes(file.type)) {
+                errorMsg.innerText = "Format invalide. Utilisez du JPG ou du PNG.";
+                errorMsg.classList.remove("hidden");
+                input.value = ""; // On vide l'input
+                return;
+            }
+
+            // --- VÉRIFICATION DE LA TAILLE ---
+            if (file.size > maxFileSize) {
+                errorMsg.innerText = "Fichier trop lourd (4 Mo maximum).";
+                errorMsg.classList.remove("hidden");
+                input.value = ""; // On vide l'input
+                return;
+            }
+
+            // --- SI TOUT EST OK : AFFICHAGE DE L'APERÇU ---
             // => le "lecteur" : new FileReader()
             const reader = new FileReader()
             // => la préparation : reader.onload

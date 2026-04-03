@@ -247,6 +247,18 @@
     object-fit: contain;
 }
 
+.error-text {
+    color: #D64D4D; /* Un rouge un peu doux */
+    font-weight: bold;
+    font-size: 0.8em;
+    margin-top: 10px;
+    display: block;
+}
+
+.hidden {
+    display: none !important;
+}
+
 /*--------------------------- mode édition---------------------------------------*/
 /* Barre noire en haut */
 #admin-bar {
