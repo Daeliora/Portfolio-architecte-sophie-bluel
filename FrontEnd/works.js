@@ -122,6 +122,11 @@ function generateFilters(categories) {
     divFilters.appendChild(buttonAll)
 
     buttonAll.addEventListener("click", () => {
+        // Gérer le changement de couleur
+        document.querySelectorAll(".filters button").forEach(btn => btn.classList.remove("active"))
+        buttonAll.classList.add("active")
+
+        // Gérer le filtrage
         document.querySelector(".gallery").innerHTML = "" // vide la galerie
         getWorks() // On recharge tout
     })
@@ -135,6 +140,11 @@ function generateFilters(categories) {
        
 
         button.addEventListener("click", () => {
+            // Gérer le changement de couleur
+            document.querySelectorAll(".filters button").forEach(btn => btn.classList.remove("active"));
+            button.classList.add("active")
+
+            // Gérer le filtrage
             filterWorks(categorie.id)
         })
          divFilters.appendChild(button)
@@ -239,6 +249,7 @@ function setupModal() {
 //------------------------------Ajout photo - Modale ------------------------
 //fonction de navigation dans la modale
 function setupModalNavigation() {
+    const modal = document.getElementById("modal")
     const btnAddPhoto = document.getElementById("btn-add-photo")
     const btnBack = document.querySelector(".js-modal-back")
     const viewGallery = document.getElementById("modal-gallery")
@@ -371,6 +382,8 @@ async function addProject(e) {
         if (response.ok) {
             // vide le formulaire et l'aperçu
             document.getElementById("form-add-photo").reset()
+            const container = document.querySelector(".upload-container");
+            container.classList.remove("preview-mode"); // Retire le mode aperçu    
             document.getElementById("image-preview").classList.add("hidden")
             document.querySelector(".upload-container i").style.display = "block"
             document.querySelector(".custom-file-upload").style.display = "block"
