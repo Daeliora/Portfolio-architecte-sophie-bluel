@@ -230,19 +230,35 @@ function setupModal() {
     const modal = document.getElementById("modal")
     const openModalBtn = document.getElementById("open-modal")
     const closeModalBtn = document.querySelector(".js-modal-close")
+    const viewGallery = document.getElementById("modal-gallery")
+    const viewAdd = document.getElementById("modal-add")
 
     if (openModalBtn) {
         openModalBtn.addEventListener("click", (e) => {
             e.preventDefault()
+
+            viewGallery.style.display = "block" // affiche la galerie
+            viewAdd.style.display = "none"      // cache le formulaire d'ajout
+            resetModalForm()                    // vide le formulaire au cas où
+
             modal.style.display = "flex"
             displayModalGallery() // On charge la galerie à l'ouverture
         })
     }
 
-    // Fermeture
-    closeModalBtn.addEventListener("click", () => modal.style.display = "none")
-    modal.addEventListener("click", (e) => {
-        if (e.target === modal) modal.style.display = "none"
+    // fermeture sur croix
+    if (closeModalBtn) {
+        closeModalBtn.addEventListener("click", () => {
+            modal.style.display = "none"
+            resetModalForm()
+        })
+    }
+    // fermeture par clic extérieur
+    window.addEventListener("click", (e) => {
+        if (e.target === modal) {
+            modal.style.display = "none"
+            resetModalForm() // vide l'aperçu
+        }
     })
 }
 
@@ -266,13 +282,22 @@ function setupModalNavigation() {
     btnBack.addEventListener("click", () => {
         viewAdd.style.display = "none"
         viewGallery.style.display = "block"
+        resetModalForm()    // vide l'aperçu
     })
 
-    // Fermeture
-    closeModalBtn.addEventListener("click", () => modal.style.display = "none")
-    modal.addEventListener("click", (e) => {
-        if (e.target === modal) modal.style.display = "none"
+    // Fermeture croix
+    closeModalBtn.addEventListener("click", () => {
+        modal.style.display = "none"
+        resetModalForm()    // vide l'aperçu
     })
+
+    // fermeture clic à côté
+    window.addEventListener("click", (e) => {
+    if (e.target === modal) {
+        modal.style.display = "none"
+        resetModalForm()    // vide l'aperçu
+    }
+})
 }
 
 // --------------------- Preview d'une image à ajouter - Modale -------------------
@@ -287,7 +312,7 @@ function setupImagePreview() {
     fileInput.addEventListener("change", () => {
         // => récupère le fichier : files[0]
         const file = fileInput.files[0]
-        const maxFileSize = 4 * 1024 * 1024 // 4 Mo en octets
+        const maxFileSize = 4 * 1024 * 1024 // 4 Mo en octets max
         const validTypes = ["image/jpeg", "image/png"]
 
         // 1. On réinitialise l'affichage à chaque changement
@@ -297,7 +322,7 @@ function setupImagePreview() {
         if (file) {
             // --- VÉRIFICATION DU FORMAT ---
             if (!validTypes.includes(file.type)) {
-                errorMsg.innerText = "Format invalide. Utilisez du JPG ou du PNG."
+                errorMsg.innerText = "Format invalide. Utilisez JPG ou PNG."
                 errorMsg.classList.remove("hidden")
                 input.value = "" // On vide l'input
                 return
@@ -342,6 +367,29 @@ async function displayCategoriesInSelect() {
         option.innerText = category.name
         select.appendChild(option)
     })
+}
+
+function resetModalForm() {
+    // vide les champs texte, l'input file et le menu déroulant
+    const form = document.getElementById("form-add-photo")
+    if (form) form.reset()  // Vide les champs
+
+    // réinitialise l'aperçu d'image
+    const container = document.querySelector(".upload-container")
+    const preview = document.getElementById("image-preview")
+    const errorMsg = document.getElementById("error-message")
+
+    if (container) container.classList.remove("preview-mode")
+    
+    if (preview) {
+        preview.src = "#"
+        preview.classList.add("hidden")
+    }
+
+    if (errorMsg) {
+        errorMsg.innerText = ""
+        errorMsg.classList.add("hidden")
+    }
 }
 
 // -----------pour dégrisser le bouton "valider" quand les critères requis sont mis----------
